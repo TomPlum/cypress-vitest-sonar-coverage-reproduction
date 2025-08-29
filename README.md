@@ -166,3 +166,4 @@ TBD
 ## References
 
 - An LCOV file viewer https://lcov-viewer.netlify.app/
+- SonarCloud community forum post https://community.sonarsource.com/t/sonarcloud-coverage-inconsistency-with-multiple-reports/127388
