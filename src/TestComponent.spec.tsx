@@ -32,9 +32,11 @@ describe('TestComponent', () => {
   /**
    * This test emulates what we have to do to fix the coverage issue by
    * adding a unit test for a case that is already covered in Cypress.
+   *
+   * It's skipped right now to show that the coverage is missing. But
+   * enabling this will bring it back to 100%.
    */
-
-  it('should call the onAnotherEvent callback function onClick when someProperty is greater than 10', () => {
+  it.skip('should call the onAnotherEvent callback function onClick when someProperty is greater than 10', () => {
     const someEventHandler = vi.fn()
     const anotherEventHandler = vi.fn()
 
