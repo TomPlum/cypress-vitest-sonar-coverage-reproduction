@@ -22,16 +22,14 @@ export const TestComponent = ({ someProperty, onSomeEvent, onAnotherEvent }: Tes
     }
   }
 
-  // A redundant ternary to force Istanbul to consider it as a branch to be instrumented.
+  // A redundant ternary to force Istanbul to consider it as branches to be instrumented.
   // The unit and cypress tests hit the falsy case for a non-zero value.
   // The cypress test alone hits the truthy case for a zero value.
   const isDisabled = someProperty === 0 ? true : false
 
   return (
-    <div>
-      <button onClick={handleClick} disabled={isDisabled}>
-        Test Button
-      </button>
-    </div>
+    <button onClick={handleClick} disabled={isDisabled}>
+      Test Button
+    </button>
   )
 }
