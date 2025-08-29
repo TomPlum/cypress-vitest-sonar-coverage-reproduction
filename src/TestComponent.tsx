@@ -1,12 +1,17 @@
 export interface TestComponentProps {
   someProperty: number
   onSomeEvent: (someProperty: number) => void
+  onAnotherEvent: (someProperty: number) => void
 }
 
-export const TestComponent = ({ someProperty, onSomeEvent }: TestComponentProps) => {
+export const TestComponent = ({ someProperty, onSomeEvent, onAnotherEvent }: TestComponentProps) => {
   const handleClick = () => {
-    if (someProperty > 0 && someProperty <= 5) {
+    if (someProperty < 5) {
       onSomeEvent(someProperty)
+    }
+
+    if (someProperty > 10) {
+      onAnotherEvent(someProperty)
     }
   }
 
