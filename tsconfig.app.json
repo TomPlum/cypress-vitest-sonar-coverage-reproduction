@@ -21,7 +21,11 @@
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+
+    /* Types */
+    "types": ["cypress", "node"]
   },
-  "include": ["src"]
+  "include": ["src", "cypress"]
 }
