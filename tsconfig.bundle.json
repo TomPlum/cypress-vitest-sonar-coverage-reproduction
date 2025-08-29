@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es2018",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.*",
+    "**/*.cy.*",
+    "src/__test-utils__",
+    "src/__mocks__",
+    "**/*.pom.ts"
+  ]
+}
