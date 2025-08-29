@@ -1,25 +1,26 @@
 import { TestComponent } from './TestComponent'
 
 describe('<TestComponent />', () => {
-  it('should be disabled', () => {
-    const onSomeEventCallabck = cy.spy().as('onSomeEventCallback')
+  const outsideCallbackBoundsCases = [-1, 6]
 
-    cy.mount(<TestComponent onSomeEvent={onSomeEventCallabck} someProperty={0}/>)
+  outsideCallbackBoundsCases.forEach(someProperty => {
+    it(`should be enabled and not call the callback function when someProperty is ${someProperty}`, () => {
+      const onSomeEventCallback = cy.spy().as('onSomeEventCallback')
 
-    cy.get('button').should('be.disabled')
+      cy.mount(<TestComponent onSomeEvent={onSomeEventCallback} someProperty={someProperty}/>)
 
+      cy.get('button').should('be.enabled')
+      cy.get('button').click()
+      cy.get('@onSomeEventCallback').should('not.have.been.called')
+    })
   })
 
-  it('should be enabled and not call the callback', () => {
-    const onSomeEventCallabck = cy.spy().as('onSomeEventCallback')
 
-    cy.mount(<TestComponent onSomeEvent={onSomeEventCallabck} someProperty={6}/>)
+  it(`should be disabled if someProperty is 0`, () => {
+    const onSomeEventCallback = cy.spy().as('onSomeEventCallback')
 
-    cy.get('button').should('be.enabled')
+    cy.mount(<TestComponent onSomeEvent={onSomeEventCallback} someProperty={0} />)
 
-    cy.get('button').click()
-
-    cy.get('@onSomeEventCallback').should('not.have.been.called')
-
+    cy.get('button').should('be.disabled')
   })
 })

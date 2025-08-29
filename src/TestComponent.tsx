@@ -10,9 +10,12 @@ export const TestComponent = ({ someProperty, onSomeEvent }: TestComponentProps)
     }
   }
 
+  // A redundant ternary to force Istanbul to consider it as a branch to be instrumented.
+  const isDisabled = someProperty === 0 ? true : false
+
   return (
     <div>
-      <button onClick={handleClick} disabled={someProperty === 0}>
+      <button onClick={handleClick} disabled={isDisabled}>
         Test Button
       </button>
     </div>
