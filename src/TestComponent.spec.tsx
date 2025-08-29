@@ -1,5 +1,5 @@
-import {fireEvent, render, screen} from "@testing-library/react";
-import {TestComponent} from "./TestComponent.tsx";
+import {fireEvent, render, screen} from "@testing-library/react"
+import {TestComponent} from "./TestComponent.tsx"
 import { describe, it, expect, vi } from 'vitest'
 
 describe('TestComponent', () => {
@@ -24,5 +24,18 @@ describe('TestComponent', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Test Button' }))
 
     expect(someEventHandler).toHaveBeenCalledExactlyOnceWith(someProperty)
+  })
+
+  it('should disable the button when someProperty is 0', () => {
+    const someEventHandler = vi.fn()
+
+    render(
+      <TestComponent
+        someProperty={0}
+        onSomeEvent={someEventHandler}
+      />
+    )
+
+    expect(screen.getByRole('button', { name: 'Test Button' })).toBeDisabled()
   })
 })
