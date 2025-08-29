@@ -33,17 +33,22 @@ describe('TestComponent', () => {
    * This test emulates what we have to do to fix the coverage issue by
    * adding a unit test for a case that is already covered in Cypress.
    */
-  it.skip('should disable the button when someProperty is 0', () => {
+
+  it('should call the onAnotherEvent callback function onClick when someProperty is greater than 10', () => {
     const someEventHandler = vi.fn()
+    const anotherEventHandler = vi.fn()
 
     render(
       <TestComponent
-        someProperty={0}
-        onAnotherEvent={vi.fn()}
+        someProperty={12}
         onSomeEvent={someEventHandler}
+        onAnotherEvent={anotherEventHandler}
       />
     )
 
-    expect(screen.getByRole('button', { name: 'Test Button' })).toBeDisabled()
+    fireEvent.click(screen.getByRole('button', { name: 'Test Button' }))
+
+    expect(anotherEventHandler).toHaveBeenCalledExactlyOnceWith(12)
+    expect(someEventHandler).not.toHaveBeenCalled()
   })
 })
