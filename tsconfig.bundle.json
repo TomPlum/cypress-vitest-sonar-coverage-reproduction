@@ -1,9 +1,32 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "esModuleInterop": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "noEmit": false,
+    "noImplicitAny": true,
     "declaration": true,
     "target": "es2018",
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": [
+      "@types/node",
+      "vitest/globals",
+      "vite/client",
+      "cypress",
+      "@testing-library/cypress"
+    ]
   },
   "include": ["src"],
   "exclude": [
