@@ -1,0 +1,85 @@
+name: Test Library Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-library:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm install
+      - run: npm run build
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm install
+      - run: npm run lint
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: [build-library, lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm install
+      - run: npm run test:unit:ci
+      - name: Store Unit LCOV Info
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-coverage-info
+          path: coverage-unit-dir/lcov.info
+
+  cypress-component-tests:
+    runs-on: ubuntu-latest
+    needs: [build-library, lint]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm install
+      - run: npm run cypress:ct:run:ci
+      - name: Store Cypress LCOV Info
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-coverage-info
+          path: coverage-cypress-dir/lcov.info
+
+  sonarcloud:
+    runs-on: ubuntu-latest
+    needs: [unit-tests, cypress-component-tests]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+      - name: Download Unit LCOV Info Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: unit-coverage-info
+          path: coverage-unit-dir
+      - name: Download Cypress LCOV Info Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: cypress-coverage-info
+          path: coverage-cypress-dir
+      - name: SonarCloud Analysis
+        uses: SonarSource/sonarqube-scan-action@v5.2.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
