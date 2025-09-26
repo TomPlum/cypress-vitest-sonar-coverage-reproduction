@@ -16,7 +16,7 @@ export const TestComponent = ({ someProperty, onSomeEvent, onAnotherEvent }: Tes
 
     // The second 2 branches.
     // The cypress test checks greater than 10 for the truthy case.
-    // The unit test will hit the implicit else hre via the falsy case.
+    // The unit test will hit the implicit else here via the falsy case.
     if (someProperty > 10) {
       onAnotherEvent(someProperty)
     }

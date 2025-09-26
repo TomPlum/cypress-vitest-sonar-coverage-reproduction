@@ -1,5 +1,12 @@
 # Cypress & Vitest Coverage Merging Reproduction
 
+# Minimal Reproduction
+
+TBD
+
+# Prior Investigation
+The below is a summary of some things we tried before finding out what the cause was.
+
 ## Context
 
 Our front-end codebases generally have two main sets of automated tests;

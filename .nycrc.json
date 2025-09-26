@@ -3,8 +3,8 @@
   "include": [
     "src/TestComponent.tsx"
   ],
-  "exclude": [
-    "cypress/support/component.ts"
-  ],
+  "sourceMap": true,
+  "instrument": true,
+  "cache": false,
   "excludeAfterMap": true
 }

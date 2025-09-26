@@ -1,4 +1,4 @@
-import { defineConfig, defaultExclude } from 'vitest/config'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import istanbul from 'vite-plugin-istanbul'
 import dts from 'vite-plugin-dts'
@@ -9,7 +9,8 @@ export default defineConfig({
     react(),
     istanbul({
       cypress: true,
-      requireEnv: false
+      requireEnv: false,
+      nycrcPath: '.nycrc.json'
     }),
     dts({
       tsconfigPath: './tsconfig.bundle.json'
@@ -42,14 +43,7 @@ export default defineConfig({
     },
     coverage: {
       provider: 'istanbul',
-      include: ['src/**/*.{ts,tsx}'],
-      exclude: [
-        ...defaultExclude,
-        'src/_cypress/**/*.*',
-        'src/storybook/**/*.*',
-        'src/api/handlers/**/*.*',
-        'src/**/*.{pact.spec.ts,handlers.ts,stories.tsx,.module.scss,cy.tsx}'
-      ],
+      include: ['src/TestComponent.tsx'],
       reporter: ['text', 'html', 'lcov'],
       reportsDirectory: 'coverage-unit-dir'
     }

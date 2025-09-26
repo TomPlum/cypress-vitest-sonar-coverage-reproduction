@@ -9,11 +9,11 @@
     "lint:fix": "eslint . --fix",
     "lint": "eslint .",
     "test:unit": "vitest src",
-    "test:unit:ci": "vitest --coverage --coverage.enabled=true --allowOnly",
+    "test:unit:ci": "rm -rf coverage-unit-dir && vitest --coverage --coverage.enabled=true --allowOnly",
     "preview": "vite preview",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
-    "cypress:ct:run:ci": "NODE_ENV=test npx cypress run --component --browser=chrome --env COVERAGE=true"
+    "cypress:ct:run:ci": "rm -rf coverage-cypress-dir && NODE_ENV=test npx cypress run --component --browser=chrome --env COVERAGE=true"
   },
   "dependencies": {
     "react": "^19.1.1",
